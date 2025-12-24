@@ -31,4 +31,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/ghcr_wan2.1_test:latest
+          tags: ghcr.io/a01demort/ghcr_wan2.1_test:latest
+
