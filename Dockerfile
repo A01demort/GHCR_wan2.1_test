@@ -43,15 +43,11 @@ WORKDIR /workspace/ComfyUI
 # 그 이후 v0.3.56 -> 안정적인데 UI가 다름 
 
 
-
-# 의존성 설치 (순서 변경 및 CUDA 버전 정정)
-RUN pip install --upgrade pip setuptools wheel && \
-    pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu121 && \
-    pip install -r requirements.txt
     
-# # 의존성 설치 -> 현재 에러발생(테스트중)
-# RUN pip install -r requirements.txt && \
-#     pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu126
+# 의존성 설치 
+RUN pip install -r requirements.txt && \
+    pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu126
+    
 
 # Node.js 18 설치 (기존 nodejs 제거 후)
 RUN apt-get remove -y nodejs npm && \
