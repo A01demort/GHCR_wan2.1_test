@@ -46,6 +46,14 @@ RUN apt-get remove -y nodejs npm && \
 # JupyterLab 안정 버전 설치
 RUN pip install --no-cache-dir jupyterlab==3.6.6 jupyter-server==1.23.6
 
+# ================================
+# 📦 ReActor ONNX 모델 (Log가리니까 Dockr로 다시 수정)
+# ================================
+RUN echo '📦 ReActor ONNX 모델 설치' && \
+    mkdir -p /workspace/ComfyUI/models/insightface && \
+    wget -q -O /workspace/ComfyUI/models/insightface/inswapper_128.onnx \
+    https://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/inswapper_128.onnx || echo '⚠️ ONNX 다운로드 실패'
+
 # Jupyter 설정파일 보완
 RUN mkdir -p /root/.jupyter && \
     echo "c.NotebookApp.allow_origin = '*'\n\
@@ -72,7 +80,7 @@ VOLUME ["/workspace"]
 EXPOSE 8188
 EXPOSE 8888
 
-# 실행 명령어(신규)
+# 실행 명령어
 CMD bash -c "\
 echo '🌀 A1(AI는 에이원) : https://www.youtube.com/@A01demort' && \
 jupyter lab --ip=0.0.0.0 --port=8888 --allow-root \
