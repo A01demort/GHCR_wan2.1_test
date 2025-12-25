@@ -64,14 +64,29 @@ c.NotebookApp.password = ''\n\
 c.NotebookApp.terminado_settings = {'shell_command': ['/bin/bash']}" \
 > /root/.jupyter/jupyter_notebook_config.py
 
+
 # A1 폴더 생성 후 자동 커스텀 노드 설치 스크립트 복사
 RUN mkdir -p /workspace/A1
 COPY init_or_check_nodes.sh /workspace/A1/init_or_check_nodes.sh
-RUN chmod +x /workspace/A1/init_or_check_nodes.sh
+COPY startup_banner.sh /workspace/A1/startup_banner.sh
+RUN chmod +x /workspace/A1/init_or_check_nodes.sh && \
+    chmod +x /workspace/A1/startup_banner.sh
 
 # Wan2.1_Vace_a1.sh 스크립트 복사 및 실행 권한 설정
 COPY Wan2.1_Vace_a1.sh /workspace/A1/Wan2.1_Vace_a1.sh
 RUN chmod +x /workspace/A1/Wan2.1_Vace_a1.sh
+
+
+
+# 원래 되던 섹션 위에는 Startup_banner 추가한 부분 점검중
+# # A1 폴더 생성 후 자동 커스텀 노드 설치 스크립트 복사
+# RUN mkdir -p /workspace/A1
+# COPY init_or_check_nodes.sh /workspace/A1/init_or_check_nodes.sh
+# RUN chmod +x /workspace/A1/init_or_check_nodes.sh
+
+# # Wan2.1_Vace_a1.sh 스크립트 복사 및 실행 권한 설정
+# COPY Wan2.1_Vace_a1.sh /workspace/A1/Wan2.1_Vace_a1.sh
+# RUN chmod +x /workspace/A1/Wan2.1_Vace_a1.sh
 
 # 볼륨 마운트
 VOLUME ["/workspace"]
@@ -83,9 +98,11 @@ EXPOSE 8888
 # 실행 명령어
 CMD bash -c "\
 echo '🌀 A1(AI는 에이원) : https://www.youtube.com/@A01demort' && \
+/workspace/A1/startup_banner.sh && \
 jupyter lab --ip=0.0.0.0 --port=8888 --allow-root \
 --ServerApp.root_dir=/workspace \
 --ServerApp.token='' --ServerApp.password='' & \
 python -u /workspace/ComfyUI/main.py --listen 0.0.0.0 --port=8188 --front-end-version Comfy-Org/ComfyUI_frontend@1.33.9 & \
 /workspace/A1/init_or_check_nodes.sh && \
 wait"
+
