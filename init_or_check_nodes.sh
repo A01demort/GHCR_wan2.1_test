@@ -117,3 +117,5 @@ echo "4. Stable AI KOREA : https://cafe.naver.com/sdfkorea"
 echo "5. 카카오톡 오픈채팅방 : https://open.kakao.com/o/gxvpv2Mf"
 echo "6. CIVITAI : https://civitai.com/user/a01demort"
 echo -e "\n==================================="
+
+/workspace/A1/startup_banner.sh
