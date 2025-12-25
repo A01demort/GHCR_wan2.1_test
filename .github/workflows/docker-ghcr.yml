@@ -31,5 +31,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/a01demort/ghcr_wan2.1_test:v0.0.1
+          tags: ghcr.io/a01demort/ghcr_wan2.1_test:v0.0.2
 
