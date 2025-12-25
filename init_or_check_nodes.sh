@@ -77,13 +77,6 @@ echo '📦 segment-anything 설치'
 git clone https://github.com/facebookresearch/segment-anything.git /workspace/segment-anything || echo '⚠️ segment-anything 실패'
 pip install -e /workspace/segment-anything || echo '⚠️ segment-anything pip 설치 실패'
 
-############################################
-# 📦 ReActor ONNX 모델 설치 (원본 유지)
-############################################
-echo '📦 ReActor ONNX 모델 설치'
-mkdir -p /workspace/ComfyUI/models/insightface
-wget -O /workspace/ComfyUI/models/insightface/inswapper_128.onnx \
-https://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/inswapper_128.onnx || echo '⚠️ ONNX 다운로드 실패'
 
 ############################################
 # ⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇
